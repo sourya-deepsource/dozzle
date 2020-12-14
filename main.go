@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"net/http"
+	_ "net/http/pprof"
 	"net/url"
 	"os"
 	"os/signal"
