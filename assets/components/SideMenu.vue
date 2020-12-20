@@ -21,8 +21,14 @@
       </div>
     </div>
     <p class="menu-label is-hidden-mobile">Containers</p>
+    <p class="control has-icons-left">
+      <input class="input" type="text" placeholder="Filter" v-model="filter" @keyup.esc="filter = null" />
+      <span class="icon is-left">
+        <icon name="search"></icon>
+      </span>
+    </p>
     <ul class="menu-list is-hidden-mobile">
-      <li v-for="item in visibleContainers" :key="item.id" :class="item.state">
+      <li v-for="item in filteredContainers" :key="item.id" :class="item.state">
         <router-link
           :to="{ name: 'container', params: { id: item.id, name: item.name } }"
           active-class="is-active"
@@ -56,7 +62,9 @@ export default {
     Icon,
   },
   data() {
-    return {};
+    return {
+      filter: "",
+    };
   },
   computed: {
     ...mapGetters(["visibleContainers", "activeContainers"]),
@@ -65,6 +73,13 @@ export default {
         map[obj.id] = obj;
         return map;
       }, {});
+    },
+    filteredContainers() {
+      if (this.filter == "") {
+        return this.visibleContainers;
+      }
+
+      return this.visibleContainers.filter((c) => c.name.toLowerCase().indexOf(this.filter) !== -1);
     },
   },
   methods: {
@@ -105,6 +120,17 @@ li.exited a {
   }
   .router-link-exact-active & {
     visibility: hidden;
+  }
+}
+
+.has-icons-left .icon {
+  padding: 10px 3px;
+}
+
+.input {
+  color: var(--body-color);
+  &::placeholder {
+    color: var(--border-color);
   }
 }
 </style>
