@@ -99,7 +99,7 @@ func main() {
 
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
-	signal.Notify(c, os.Kill)
+	signal.Notify(c, syscall.SIGTERM)
 	<-c
 	log.Infof("Shutting down...")
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
