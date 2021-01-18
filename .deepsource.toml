@@ -1,0 +1,35 @@
+version = 1
+
+test_patterns = [
+    "**/*_test.go",
+    "/integration/__tests__/**"
+]
+
+[[analyzers]]
+name = "go"
+enabled = true
+
+  [analyzers.meta]
+  import_paths = ["github.com/withshubh/dozzle"]
+
+[[analyzers]]
+name = "docker"
+enabled = true
+
+  [analyzers.meta]
+  dockerfile_paths = [
+    "/Dockerfile",
+    "/integration/Dockerfile"
+  ]
+
+[[analyzers]]
+name = "javascript"
+enabled = true
+
+  [analyzers.meta]
+  environment = [
+    "nodejs",
+    "browser",
+    "jest"
+  ]
+  plugins = ["vue"]
