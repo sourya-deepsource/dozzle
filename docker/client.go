@@ -78,7 +78,7 @@ func (d *dockerClient) FindContainer(id string) (Container, error) {
 			break
 		}
 	}
-	if found == false {
+	if !found {
 		return container, fmt.Errorf("Unable to find container with id: %s", id)
 	}
 
