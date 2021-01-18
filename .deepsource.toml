@@ -33,3 +33,7 @@ enabled = true
     "jest"
   ]
   plugins = ["vue"]
+  dependency_file_paths = [
+  "/integration/package.json",
+  "/package.json"
+]
